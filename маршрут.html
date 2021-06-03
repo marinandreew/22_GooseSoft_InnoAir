@@ -1,0 +1,240 @@
+<html> 
+<head> 
+<style> 
+#map { 
+height: 1000px; 
+width: 100%; 
+} 
+</style> 
+</head> 
+<body> 
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script> 
+<script language="javascript" type="text/javascript"> 
+
+var directionsDisplay; 
+var directionsService = new google.maps.DirectionsService(); 
+
+function InitializeMap() { 
+directionsDisplay = new google.maps.DirectionsRenderer(); 
+var latlng = new google.maps.LatLng(42.501, 27.468); 
+var myOptions = 
+{ 
+zoom: 18, 
+center: latlng, 
+mapTypeId: google.maps.MapTypeId.ROADMAP 
+}; 
+var map = new google.maps.Map(document.getElementById("map"), myOptions); 
+var myLatLng = new google.maps.LatLng(42.498655, 27.468535); 
+
+var coordinates = [
+  {id:1, latlng: new google.maps.LatLng(42.509406, 27.463705), state: 1, title: 'adres', time: 30, marker: null, connected: [1, 2]},
+  {id:2, latlng: new google.maps.LatLng(42.509651, 27.463447), state: 0, title: 'adres', time: 30, marker: null, connected: [1, 2]},
+  {id:3, latlng: new google.maps.LatLng(42.509722, 27.463791), state: 0, title: 'adres', time: 30, marker: null},
+  {id:4, latlng: new google.maps.LatLng(42.502550, 27.467199), state: 1, title: 'adres', time: 20, makrer: null},
+  {id:6, latlng: new google.maps.LatLng(42.502407, 27.467153), state: 0, title: 'adres', time: 20, makrer: null},
+  {id:7 , latlng: new google.maps.LatLng(42.502365, 27.467303), state: 1, title: 'adres', time: 20, makrer: null},
+  {id:8 , latlng: new google.maps.LatLng(42.502443, 27.467440), state: 0, title: 'adres', time: 20, makrer: null},
+  {id:10, latlng: new google.maps.LatLng(42.501164, 27.467654), state: 0, title: 'adres', time: 20, makrer: null},
+  {id:11, latlng: new google.maps.LatLng(42.501085, 27.467756), state: 1, title: 'adres', time: 20, makrer: null},
+  {id:12, latlng: new google.maps.LatLng(42.500994, 27.467694), state: 0, title: 'adres', time: 20, makrer: null},
+  {id:14, latlng: new google.maps.LatLng(42.502407, 27.467153), state: 0, title: 'adres', time: 20, makrer: null},
+  {id:15, latlng: new google.maps.LatLng(42.502365, 27.467303), state: 1, title: 'adres', time: 20, makrer: null},  
+  {id:18, latlng: new google.maps.LatLng(42.491257, 27.471723), state: 0, title: 'adres', time: 20, makrer: null},
+  {id:19, latlng: new google.maps.LatLng(42.491392, 27.471867), state: 1, title: 'adres', time: 20, makrer: null},
+  {id:20, latlng: new google.maps.LatLng(42.491273, 27.472018), state: 0, title: 'adres', time: 20, makrer: null},
+  {id:22, latlng: new google.maps.LatLng(42.512272, 27.457706), state: 1, title: 'adres', time: 20, makrer: null},
+  {id:23, latlng: new google.maps.LatLng(42.512493, 27.457558), state: 0, title: 'adres', time: 20, makrer: null},
+  {id:24, latlng: new google.maps.LatLng(42.512430, 27.457389), state: 1, title: 'adres', time: 20, makrer: null},
+{id:25, latlng: new google.maps.LatLng(42.491421, 27.475382), state: 0, title: 'adres', time: 15, makrer: null},
+{id:26, latlng: new google.maps.LatLng(42.491376, 27.475595), state: 1, title: 'adres', time: 15, makrer: null},
+{id:27, latlng: new google.maps.LatLng(42.491332, 27.475170), state: 1, title: 'adres', time: 15, makrer: null},
+{id:28, latlng: new google.maps.LatLng (42.491196, 27.475363), state: 0, title: 'adres', time: 15, makrer: null},
+  {id:28, latlng: new google.maps.LatLng (42.498186, 27.480177), state: 1, title: 'adres', time: 20, makrer: null},
+  {id:29, latlng: new google.maps.LatLng (42.498453, 27.479982), state: 1, title: 'adres', time: 20, makrer: null}, 
+{id:30, latlng: new google.maps.LatLng(42.498730, 27.480072), state: 1, title: 'adres', time: 20, makrer: null},
+{id:31, latlng: new google.maps.LatLng(42.499086, 27.479753), state: 0, title: 'adres', time: 20, makrer: null},
+{id:32, latlng: new google.maps.LatLng(42.498599, 27.479868), state: 0, title: 'adres', time: 20, makrer: null},
+{id:33, latlng: new google.maps.LatLng(42.499237, 27.479498), state: 0, title: 'adres', time: 20, makrer: null},
+{id:34, latlng: new google.maps.LatLng(42.499190, 27.479139), state: 1, title: 'adres', time: 20, makrer: null},
+{id:35, latlng: new google.maps.LatLng(42.499314, 27.479174), state: 0, title: 'adres', time: 20, makrer: null}, 
+  {id:37, latlng: new google.maps.LatLng(42.500644, 27.478040) , state: 1, title: 'adres', time: 40, makrer: null},
+  {id:38, latlng: new google.maps.LatLng(42.500729, 27.478131), state: 0, title: 'adres', time: 40, makrer: null},
+  {id:39, latlng: new google.maps.LatLng(42.500761, 27.477691) , state: 1, title: 'adres', time: 40, makrer: null},
+  {id:40, latlng: new google.maps.LatLng (42.500674, 27.477632), state: 0, title: 'adres', time: 40, makrer: null},
+{id:42, latlng: new google.maps.LatLng(42.503854, 27.474517), state: 1, title: 'adres', time: 30, makrer: null},
+{id:43, latlng: new google.maps.LatLng(42.503737, 27.474423), state: 0, title: 'adres', time: 30, makrer: null},
+{id:44, latlng: new google.maps.LatLng(42.503743, 27.474863), state: 1, title: 'adres', time: 30, makrer: null},
+{id:45, latlng: new google.maps.LatLng(42.503850, 27.474873), state: 0, title: 'adres', time: 30, makrer: null},   
+  {id:46, latlng:new google.maps.LatLng(42.507012, 27.471385) , state: 1, title: 'adres', time: 25, makrer: null},
+  {id:47, latlng: new google.maps.LatLng(42.507074, 27.471230), state: 0, title: 'adres', time: 10, makrer: null},
+  {id:48, latlng:new google.maps.LatLng(42.507067, 27.471133) , state: 1, title: 'adres', time: 25, makrer: null},
+  {id:49, latlng: new google.maps.LatLng(42.506974, 27.471182), state: 0, title: 'adres', time: 10, makrer: null},
+  {id:50, latlng: new google.maps.LatLng(42.506975, 27.471331), state: 1, title: 'adres', time: 10, makrer: null},
+{id:51, latlng: new google.maps.LatLng(42.507424, 27.470948), state: 0, title: 'adres', time: 28, makrer: null},
+{id:52, latlng: new google.maps.LatLng(42.507472, 27.470945), state: 1, title: 'adres', time: 28, makrer: null},
+{id:53, latlng: new google.maps.LatLng(42.507416, 27.470767), state: 0, title: 'adres', time: 28, makrer: null},
+   {id:54, latlng: new google.maps.LatLng(42.512825, 27.464460), state: 1, title: 'adres', time: 40, makrer: null},
+   {id:55, latlng: new google.maps.LatLng(42.512722, 27.464814), state: 0, title: 'adres', time: 40, makrer: null},
+   {id:56, latlng: new google.maps.LatLng(42.513240, 27.464165), state: 0, title: 'adres', time: 40, makrer: null},
+   {id:57, latlng: new google.maps.LatLng(42.513074, 27.464707), state: 1, title: 'adres', time: 40, makrer: null},
+{id:58, latlng: new google.maps.LatLng (42.497541, 27.468921), state: 1, title: 'adres', time: 35, makrer: null},
+{id:59, latlng: new google.maps.LatLng (42.497470, 27.469163), state: 0, title: 'adres', time: 35, makrer: null},
+{id:60, latlng: new google.maps.LatLng (42.497319, 27.469034), state: 1, title: 'adres', time: 35, makrer: null},
+{id:61, latlng: new google.maps.LatLng (42.497387, 27.468809), state: 0, title: 'adres', time: 35, makrer: null},
+   {id:62, latlng: new google.maps.LatLng(42.498606, 27.468551) , state: 1, title: 'adres', time: 20, makrer: null},
+   {id:63, latlng: new google.maps.LatLng(42.498559, 27.468701), state: 0, title: 'adres', time: 20, makrer: null},
+   {id:64, latlng: new google.maps.LatLng(42.498468, 27.468607) , state: 1, title: 'adres', time: 20, makrer: null},
+{id:65, latlng: new google.maps.LatLng (42.493519, 27.470593), state: 1, title: 'adres', time: 18, makrer: null},
+{id:66, latlng: new google.maps.LatLng (42.493416, 27.470802), state: 0, title: 'adres', time: 18, makrer: null},
+{id:67, latlng: new google.maps.LatLng (42.493345, 27.470716), state: 1, title: 'adres', time: 18, makrer: null},
+{id:68, latlng: new google.maps.LatLng (42.493377, 27.470528), state: 0, title: 'adres', time: 18, makrer: null},
+   {id:69, latlng: new google.maps.LatLng (42.502907, 27.470335), state: 1, title: 'adres', time: 20, makrer: null},
+   {id:70, latlng: new google.maps.LatLng(42.502948, 27.470085) , state: 0, title: 'adres', time: 20, makrer: null},
+   {id:71, latlng: new google.maps.LatLng (42.503011, 27.470138), state: 1, title: 'adres', time: 20, makrer: null},
+   {id:72, latlng: new google.maps.LatLng(42.503005, 27.470374), state: 0, title: 'adres', time: 20, makrer: null},
+{id:73, latlng: new google.maps.LatLng (42.493143, 27.450139), state: 1, title: 'adres', time: 22, makrer: null},
+{id:74, latlng: new google.maps.LatLng (42.493579, 27.450408), state: 1, title: 'adres', time: 22, makrer: null},
+{id:75, latlng: new google.maps.LatLng (42.493468, 27.450719), state: 0, title: 'adres', time: 22, makrer: null},
+{id:76, latlng: new google.maps.LatLng (42.493321, 27.450515), state: 0, title: 'adres', time: 22, makrer: null},
+{id:77, latlng: new google.maps.LatLng (42.493151, 27.450435), state: 1, title: 'adres', time: 22, makrer: null},
+   {id:78, latlng: new google.maps.LatLng (42.490452, 27.454743) , state: 1, title: 'adres', time: 20, makrer: null},
+   {id:79, latlng: new google.maps.LatLng (42.490179, 27.454737), state: 0, title: 'adres', time: 20, makrer: null},
+   {id:80, latlng: new google.maps.LatLng (42.490578, 27.455065), state: 1, title: 'adres', time: 20, makrer: null},
+   {id:81, latlng: new google.maps.LatLng (42.490456, 27.455290), state: 0, title: 'adres', time: 20, makrer: null},
+{id:82, latlng: new google.maps.LatLng(42.513070, 27.455908), state: 1, title: 'adres', time: 20, makrer: null},
+{id:83, latlng: new google.maps.LatLng(42.512949, 27.455978), state: 0, title: 'adres', time: 20, makrer: null},
+{id:84, latlng: new google.maps.LatLng(42.513036, 27.456176), state: 1, title: 'adres', time: 20, makrer: null},
+   {id:85, latlng: new google.maps.LatLng(42.514952, 27.451765), state: 1, title: 'adres', time: 20, makrer: null},
+   {id:86, latlng: new google.maps.LatLng(42.514866, 27.451816), state: 0, title: 'adres', time: 20, makrer: null},
+   {id:87, latlng: new google.maps.LatLng (42.514986, 27.451983), state: 1, title: 'adres', time: 20, makrer: null},
+   {id:88, latlng: new google.maps.LatLng(42.514954, 27.451893) , state: 0, title: 'adres', time: 20, makrer: null},
+{id:89, latlng: new google.maps.LatLng (42.522111, 27.456474), state: 1, title: 'adres', time: 20, makrer: null},
+{id:90, latlng: new google.maps.LatLng (42.522038, 27.456656), state: 0, title: 'adres', time: 20, makrer: null},
+{id:91, latlng: new google.maps.LatLng (42.522018, 27.456828), state: 1, title: 'adres', time: 20, makrer: null},
+{id:92, latlng: new google.maps.LatLng (42.521990, 27.456471), state: 0, title: 'adres', time: 20, makrer: null},
+   {id:93, latlng: new google.maps.LatLng (42.516707, 27.447686), state: 1, title: 'adres', time: 35, makrer: null},
+   {id:94, latlng: new google.maps.LatLng (42.516674, 27.448168), state: 1, title: 'adres', time: 35, makrer: null},
+   {id:95, latlng: new google.maps.LatLng (42.516733, 27.448303), state: 1, title: 'adres', time: 35, makrer: null},
+   {id:96, latlng: new google.maps.LatLng(42.516674, 27.447970) , state: 0, title: 'adres', time: 35, makrer: null},
+   {id:97, latlng: new google.maps.LatLng(42.516824, 27.448066), state: 0, title: 'adres', time: 35, makrer: null},
+   {id:98, latlng: new google.maps.LatLng(42.516891, 27.447972) , state: 0, title: 'adres', time: 35, makrer: null},
+{id:99, latlng: new google.maps.LatLng (42.529406, 27.457349), state: 1, title: 'adres', time: 20, makrer: null},
+{id:100, latlng: new google.maps.LatLng(42.529331, 27.457628), state: 0, title: 'adres', time: 20, makrer: null},
+{id:101, latlng: new google.maps.LatLng(42.529068, 27.457641), state: 1, title: 'adres', time: 20, makrer: null},
+{id:102, latlng: new google.maps.LatLng(42.529108, 27.457397), state: 0, title: 'adres', time: 20, makrer: null},
+  {id:103, latlng: new google.maps.LatLng(42.530823, 27.462176), state: 1, title: 'adres', time: 20, makrer: null},
+  {id:104, latlng: new google.maps.LatLng (42.530826, 27.462675), state: 0, title: 'adres', time: 20, makrer: null},
+  {id:105, latlng: new google.maps.LatLng (42.531150, 27.462688), state: 1, title: 'adres', time: 20, makrer: null},
+  {id:106, latlng: new google.maps.LatLng (42.531164, 27.462262), state: 0, title: 'adres', time: 20, makrer: null},
+{id:107, latlng: new google.maps.LatLng(42.457732, 27.405460) , state: 1, title: 'adres', time: 20, makrer: null},
+{id:108, latlng: new google.maps.LatLng(42.457816, 27.405809) , state: 0, title: 'adres', time: 20, makrer: null},
+{id:109, latlng: new google.maps.LatLng(42.458004, 27.405675) , state: 1, title: 'adres', time: 20, makrer: null},
+{id:110, latlng: new google.maps.LatLng(42.457948, 27.405412) , state: 0, title: 'adres', time: 20, makrer: null},  
+  {id:111, latlng: new google.maps.LatLng(42.452880, 27.420515) , state: 1, title: 'adres', time: 20, makrer: null},
+  {id:112, latlng: new google.maps.LatLng(42.452852, 27.420064) , state: 0, title: 'adres', time: 20, makrer: null},
+  {id:113, latlng: new google.maps.LatLng(42.453171, 27.420096) , state: 1, title: 'adres', time: 20, makrer: null},
+  {id:114, latlng: new google.maps.LatLng(42.453143, 27.420547 ), state: 0, title: 'adres', time: 20, makrer: null},
+
+
+];
+
+function changeIcon(index) {
+    if(coordinates[index].state==0){
+      coordinates[index].marker.setIcon("882.png");
+      coordinates[index].state=1;
+    } else {
+      coordinates[index].marker.setIcon("228.png");
+      coordinates[index].state=0;  
+    }
+  setTimeout(changeIcon, coordinates[index].time*1000, index);
+
+  }
+
+function createLightChanger(index){
+  setTimeout(changeIcon, coordinates[index].time*1000, index);
+}
+
+coordinates.forEach(function(value, index){
+  console.log(value);
+  if(value.state==1){
+    image_icon = "882.png";
+  } else {
+    image_icon = "228.png";
+  }
+
+    var marker = new google.maps.Marker({
+          position: value.latlng,
+          map: map,
+          title: value.title,
+          icon: image_icon,
+    }); 
+
+    coordinates[index].marker = marker;
+    createLightChanger(index);
+});
+
+
+
+
+
+
+
+
+
+directionsDisplay.setMap(map); 
+directionsDisplay.setPanel(document.getElementById('directionpanel')); 
+
+var control = document.getElementById('control'); 
+control.style.display = 'block'; 
+
+
+} 
+function calcRoute() { 
+
+var start = document.getElementById('startvalue').value; 
+var end = document.getElementById('endvalue').value; 
+var request = { 
+origin: start, 
+destination: end, 
+travelMode: google.maps.DirectionsTravelMode.DRIVING 
+}; 
+directionsService.route(request, function (response, status) { 
+if (status == google.maps.DirectionsStatus.OK) { 
+directionsDisplay.setDirections(response); 
+} 
+}); 
+
+} 
+
+function Button1_onclick() { 
+calcRoute(); 
+} 
+
+window.onload = InitializeMap; 
+
+
+</script> 
+
+<h2>Маршрут  </h2> 
+<table style="width: 100%; vertical-align: bottom;"> 
+<tr> 
+<td> 
+<label>Начало</label><br />
+<input id="startvalue" type="text" style="width: 100%" /> 
+</td> 
+<td> 
+<label>Край</label><br />
+<input id="endvalue" type="text" style="width: 100%" /> 
+</td> 
+<td style=" vertical-align: bottom;"> 
+<input id="Button1" type="button" value="Давай" onclick="return Button1_onclick()" /></td> 
+</tr> 
+<tr> 
+<td colspan ="3"> 
+<div id ="map" style="height: 478px; width: 100%; margin-top: 30px;" > 
+</div> 
+</td> 
+</tr> 
+</table> 
+</body> 
+</html>
